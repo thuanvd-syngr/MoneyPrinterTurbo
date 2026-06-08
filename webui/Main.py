@@ -557,6 +557,127 @@ if not config.app.get("hide_config", False):
                     )
                 st.info(tips)
 
+            if config.ui.get("language") == "vi":
+                vi_tips = {
+                    "ollama": f"""
+##### Hướng dẫn cấu hình Ollama
+- **API Key**: Điền tùy ý, ví dụ `123`
+- **Base Url**: Thường là `http://localhost:11434/v1`
+    - Nếu `MoneyPrinterTurbo` và `Ollama` **không cùng máy**, điền địa chỉ IP của máy chạy Ollama
+    - Nếu chạy qua `Docker`, nên dùng `http://host.docker.internal:11434/v1`
+- **Model Name**: Kiểm tra bằng `ollama list`, ví dụ `qwen:7b`
+""",
+                    "openai": """
+##### Hướng dẫn cấu hình OpenAI
+> Cần bật VPN chế độ toàn cầu
+- **API Key**: [Đăng ký tại đây](https://platform.openai.com/api-keys)
+- **Base Url**: Để trống nếu dùng OpenAI; điền URL tương thích nếu dùng nhà cung cấp khác (ví dụ OpenRouter)
+- **Model Name**: Điền tên model bạn có quyền sử dụng
+""",
+                    "aihubmix": """
+##### Hướng dẫn cấu hình AIHubMix
+- **Link đăng ký**: [Đăng ký AIHubMix](https://aihubmix.com/?aff=CEve)
+- **Base Url**: Đã điền sẵn `https://aihubmix.com/v1`
+- **Model gợi ý**: Mặc định `gpt-5.4-mini`, hoặc các model miễn phí khác
+
+Lý do nên dùng:
+- **Đa dạng**: 700+ model gồm Claude, GPT, Gemini, Grok, DeepSeek...
+- **Ổn định**: Không giới hạn đồng thời, triển khai trên Google Cloud
+- **Đầy đủ**: Văn bản, hình ảnh, video, TTS, STT, embedding, Rerank
+- **Minh bạch**: Tính theo lượng dùng, có model miễn phí
+""",
+                    "moonshot": """
+##### Hướng dẫn cấu hình Moonshot
+- **API Key**: [Đăng ký tại đây](https://platform.moonshot.cn/console/api-keys)
+- **Base Url**: `https://api.moonshot.cn/v1`
+- **Model Name**: Ví dụ `moonshot-v1-8k`, [xem danh sách model](https://platform.moonshot.cn/docs/intro)
+""",
+                    "oneapi": """
+##### Hướng dẫn cấu hình OneAPI
+- **API Key**: Điền API key của OneAPI
+- **Base Url**: Điền URL cơ sở của OneAPI
+- **Model Name**: Ví dụ `claude-3-5-sonnet-20240620`
+""",
+                    "qwen": """
+##### Hướng dẫn cấu hình Qwen (Tongyi Qianwen)
+- **API Key**: [Đăng ký tại đây](https://dashscope.console.aliyun.com/apiKey)
+- **Base Url**: Để trống
+- **Model Name**: Ví dụ `qwen-max`, [xem danh sách model](https://help.aliyun.com/zh/dashscope/developer-reference/model-introduction)
+""",
+                    "g4f": """
+##### Hướng dẫn cấu hình gpt4free
+> [Dự án mã nguồn mở](https://github.com/xtekky/gpt4free), miễn phí nhưng **không ổn định**
+- **API Key**: Điền tùy ý, ví dụ `123`
+- **Base Url**: Để trống
+- **Model Name**: Ví dụ `gpt-3.5-turbo`, [xem danh sách model](https://github.com/xtekky/gpt4free/blob/main/g4f/models.py)
+""",
+                    "azure": """
+##### Hướng dẫn cấu hình Azure
+> [Xem cách triển khai model](https://learn.microsoft.com/zh-cn/azure/ai-services/openai/how-to/create-resource)
+- **API Key**: [Tạo tại Azure portal](https://portal.azure.com/#view/Microsoft_Azure_ProjectOxford/CognitiveServicesHub/~/OpenAI)
+- **Base Url**: Để trống
+- **Model Name**: Điền tên deployment thực tế của bạn
+""",
+                    "gemini": """
+##### Hướng dẫn cấu hình Gemini
+> Cần bật VPN chế độ toàn cầu
+- **API Key**: [Đăng ký tại đây](https://ai.google.dev/)
+- **Base Url**: Để trống
+- **Model Name**: Ví dụ `gemini-1.0-pro`
+""",
+                    "grok": """
+##### Hướng dẫn cấu hình Grok
+- **API Key**: Điền API key của Grok
+- **Base Url**: `https://api.x.ai/v1`
+- **Model Name**: Ví dụ `grok-4.3`
+""",
+                    "groq": """
+##### Hướng dẫn cấu hình Groq
+- **API Key**: [Đăng ký tại đây](https://console.groq.com/keys)
+- **Base Url**: `https://api.groq.com/openai/v1`
+- **Model Name**: Ví dụ `llama-3.3-70b-versatile`
+""",
+                    "deepseek": """
+##### Hướng dẫn cấu hình DeepSeek
+- **API Key**: [Đăng ký tại đây](https://platform.deepseek.com/api_keys)
+- **Base Url**: `https://api.deepseek.com`
+- **Model Name**: `deepseek-chat`
+""",
+                    "mimo": """
+##### Hướng dẫn cấu hình Xiaomi MiMo
+- **API Key**: [Đăng ký tại đây](https://platform.xiaomimimo.com/docs/zh-CN/quick-start/first-api-call)
+- **Base Url**: `https://api.xiaomimimo.com/v1`
+- **Model Name**: Mặc định `mimo-v2.5-pro`
+""",
+                    "modelscope": """
+##### Hướng dẫn cấu hình ModelScope
+- **API Key**: [Đăng ký tại đây](https://modelscope.cn/docs/model-service/API-Inference/intro)
+- **Base Url**: `https://api-inference.modelscope.cn/v1/`
+- **Model Name**: Ví dụ `Qwen/Qwen3-32B`, [xem danh sách model](https://modelscope.cn/models)
+""",
+                    "ernie": """
+##### Hướng dẫn cấu hình ERNIE (Baidu Wenxin)
+- **API Key**: [Đăng ký tại đây](https://console.bce.baidu.com/qianfan/ais/console/applicationConsole/application)
+- **Secret Key**: [Đăng ký tại đây](https://console.bce.baidu.com/qianfan/ais/console/applicationConsole/application)
+- **Base Url**: Điền **Request URL** theo [tài liệu](https://cloud.baidu.com/doc/WENXINWORKSHOP/s/jlil56u11)
+""",
+                    "pollinations": """
+##### Hướng dẫn cấu hình Pollinations AI
+- **API Key**: Tùy chọn — để trống để dùng miễn phí
+- **Base Url**: Mặc định `https://text.pollinations.ai/openai`
+- **Model Name**: Dùng `openai-fast` hoặc tên model cụ thể
+""",
+                    "litellm": """
+##### Hướng dẫn cấu hình LiteLLM
+> [LiteLLM](https://github.com/BerriAI/litellm) hỗ trợ 100+ nhà cung cấp qua một giao diện thống nhất.
+> Đặt API key qua biến môi trường: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GEMINI_API_KEY`...
+- **Model Name**: Định dạng LiteLLM — `openai/gpt-4o`, `anthropic/claude-sonnet-4-20250514`, `gemini/gemini-2.5-flash`. [Xem danh sách nhà cung cấp](https://docs.litellm.ai/docs/providers)
+""",
+                }
+                vi_tip = vi_tips.get(llm_provider, "")
+                if vi_tip:
+                    st.info(vi_tip)
+
             st_llm_api_key = st.text_input(
                 tr("API Key"), value=llm_api_key, type="password"
             )
@@ -679,9 +800,16 @@ with left_panel:
         for code in support_locales:
             video_languages.append((code, code))
 
+        saved_video_language = config.app.get("video_language", "vi-VN")
+        saved_video_language_index = 0
+        for i, (_, lang_code) in enumerate(video_languages):
+            if lang_code == saved_video_language:
+                saved_video_language_index = i
+                break
+
         selected_index = st.selectbox(
             tr("Script Language"),
-            index=0,
+            index=saved_video_language_index,
             options=range(
                 len(video_languages)
             ),  # Use the index as the internal option value
@@ -690,6 +818,7 @@ with left_panel:
             ],  # The label is displayed to the user
         )
         params.video_language = video_languages[selected_index][1]
+        config.app["video_language"] = params.video_language
 
         with st.expander(tr("Advanced Script Settings"), expanded=False):
             params.paragraph_number = st.slider(
